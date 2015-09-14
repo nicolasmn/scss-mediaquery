@@ -1,0 +1,96 @@
+///
+/// Function
+///
+/// @group function
+///
+
+
+/// Build a query string by given keyword and key in `$query-breakpoints`.
+///
+/// @access  public
+/// @type    Function
+///
+/// @require $query-breakpoints
+/// @require map-get-next <https://gist.github.com/agorilla/9df052eb1e15d8aea446>
+///
+/// @param   {String} $mode - Either `min`, `max` or `only`
+/// @param   {mapKey} $size - Key in `$query-breakpoints`
+/// @return  {Query}        - Query string
+///
+/// @example Scss - Query modes
+///   @media #{query(min, mini)} { ... }
+///   @media #{query(max, medium)} { ... }
+///   @media #{query(only, small)} { ... }
+///
+/// @example Css - Output
+///   @media (min-width: 480px) { ... }
+///   @media (max-width: 959px) { ... }
+///   @media (min-width: 480px) and (max-width: 959px) { ... }
+///
+@function query($mode, $size) {
+
+  // Store reduction value as variable for conversion
+  $reduce: 1px;
+
+  // Convert `$reduce` to breakpoint value if `$reduce`
+  // is needed later on and units are not equal
+  @if index((max, only), $mode) {
+
+    $unit: unit(query-get($size));
+
+    @if $unit != unit($reduce) {
+
+      // Check if a function named after breakpoint unit
+      // exists and call it
+      @if function-exists($unit) {
+        $reduce: call($unit, $reduce);
+      }
+
+      // Handle conversion if breakpoint unit is in em
+      @elseif $unit == em {
+        $reduce: ($reduce / $base-font-size) * 1em;
+      }
+
+      @else {
+        @error "Can not convert #{$reduce} to #{unit(query-get($size))}.";
+        @return null;
+      }
+    }
+  }
+
+  // Test if key exists
+  @if query-exists($size) {
+
+    // Greater than breakpoint
+    @if min == $mode {
+      @return "(min-width: #{query-get($size)})";
+    }
+
+    // Smaller than breakpoint
+    @if max == $mode {
+      @return "(max-width: #{query-get($size) - $reduce})";
+    }
+
+    // Only breakpoint
+    @if only == $mode {
+
+      // Get next item from map
+      $capper: map-get-next(query-get(), $size);
+
+      // Return the query if there is a next item
+      @if $capper {
+        @return "(min-width: #{query-get($size)}) and " +
+                "(max-width: #{$capper - $reduce})";
+      }
+
+      @error "‘#{$size}’ is the last key in current context.";
+      @return null;
+    }
+
+    @error  "‘#{$mode}’ is not a valid mode. " +
+            "Valid modes are: min, max, only, res.";
+  }
+  @error "There is no key ‘#{$size}’ in the current context. " +
+         "Valid keys are: #{map-keys(query-get())}.";
+
+}

@@ -1,0 +1,23 @@
+{
+  "name": "scss-query",
+  "authors": [
+    "Nicolas Müller Noulezas <hello@nicolasmn.de>"
+  ],
+  "description": "Simple and memorizeable @media queries helper function",
+  "main": "_query.scss",
+  "keywords": [
+    "scss",
+    "css",
+    "media",
+    "query",
+    "function"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {}
+}

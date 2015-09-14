@@ -1,0 +1,34 @@
+///
+/// Defaults
+///
+/// @group defaults
+///
+
+/// Base font size used for em conversion.
+///
+/// @type {Number}
+$base-font-size: 16px !default;
+
+
+/// Default breakpoints for common screen sizes.
+/// Stores the sizes used by `query` function.
+///
+/// @access public
+/// @type   Map
+///
+/// @prop   {Number} breakpoints.micro  - Smartwatches
+/// @prop   {Number} breakpoints.mini   - Smartphones
+/// @prop   {Number} breakpoints.small  - Tablets
+/// @prop   {Number} breakpoints.medium - Notebooks
+/// @prop   {Number} breakpoints.large  - Laptops
+/// @prop   {Number} breakpoints.huge   - TVs
+/// @prop   {Number} breakpoints.giant  - Retina sickness
+$query-breakpoints: (
+  'micro':   320px,
+  'mini':    480px,
+  'small':   768px,
+  'medium':  960px,
+  'large':  1440px,
+  'huge':   2560px,
+  'giant':  5120px
+) !default;

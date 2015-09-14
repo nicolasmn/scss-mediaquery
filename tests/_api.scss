@@ -1,0 +1,99 @@
+
+@include describe("Query Exists [function]") {
+  @include it("should return true if query width exists and false if not") {
+    @include query(init, ("test": 500px));
+
+    @include should( expect( query-exists(test) ), to( be-truthy() ));
+    @include should( expect( query-exists(noop) ), to( be-falsy()  ));
+  }
+}
+
+
+
+@include describe("Query Get [function]") {
+  @include it("should return queried breakpoint width or null if not found") {
+    @include query(init, ("test": 500px));
+
+    @include should( expect( query-get(test) ), to( equal(500px) ));
+    @include should( expect( query-get(noop) ), to( be-null()    ));
+  }
+}
+
+
+
+@include describe("Query [mixin]") {
+
+  // Test reset
+  @include it("Reset should reset the context") {
+    @include query(reset);
+    @include should( expect( query-get() ), to( be-null() ));
+  }
+
+
+  // Test init
+  @include it("Init should initialze the context") {
+    $map: ("test": 500px);
+    @include query(init, $map);
+    @include should( expect( query-get() ), to( equal($map) ));
+  }
+
+
+  // Test use
+  @include it("Use should add the given breakpoints to context while in content") {
+    $map: ("test": 500px, "test1": 600px);
+    @include query(init, $map);
+    @include query(use, current, 500px) {
+        @include should( expect( query-get(current) ), to( equal(500px) ));
+    }
+    @include should( expect( query-get() ), to( equal($map) ));
+  }
+
+
+  // Test add
+  @include it("Add should add new breakpoints to context") {
+    @include query(reset);
+
+    // add single breakpoint
+    @include query(add, test, 500px);
+    @include should( expect( query-get(test) ), to( equal(500px) ));
+    @include query(reset);
+
+    // add multible breakpoints
+    $map: (test1: 400px, test2: 500px);
+    @include query(add, $map);
+    @include should( expect( query-get() ), to( equal($map) ));
+  }
+
+
+  // Test remove
+  @include it("Remove should remove existing breakpoints from context") {
+    @include query(reset);
+    @include query(add, (test1: 500px, test2: 600px, test3: 700px));
+
+    // remove multible breakpoints
+    @include query(remove, test1, test2);
+    @include should( expect( query-get() ), to( equal(("test3": 700px)) ));
+
+    // remove single breakpoint
+    @include query(remove, test3);
+    @include should( expect( query-get() ), to( be-null() ));
+  }
+
+
+  // Test set
+  @include it("Set should set existing breakpoints in context") {
+    @include query(reset);
+    @include query(add, (test: 500px, test1: 500px, test2: 600px));
+
+    // set one breakpoint
+    @include query(set, test, 800px);
+    @include should( expect( query-get(test) ), to( equal(800px) ));
+    @include query(remove, test);
+
+    // set multible breakpoints
+    $map: ("test1": 700px, "test2": 800px);
+    @include query(set, $map);
+    @include should( expect( query-get() ), to( equal($map) ));
+  }
+
+}

@@ -1,0 +1,36 @@
+{
+  "name": "scss-query",
+  "version": "0.1.0",
+  "description": "Simple and memorizeable @media queries helper function",
+  "main": "_query.scss",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "bootcamp": "^1.1.7",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt": "^0.4.5"
+  },
+  "scripts": {
+    "test": "npm install && bower install && grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolasmn/scss-query.git"
+  },
+  "keywords": [
+    "scss",
+    "css",
+    "media",
+    "query",
+    "function"
+  ],
+  "author": "Nicolas Müller Noulezas <hello@nicolasmn.de> (http://nicolasmn.de)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolasmn/scss-query/issues"
+  },
+  "homepage": "https://github.com/nicolasmn/scss-query"
+}

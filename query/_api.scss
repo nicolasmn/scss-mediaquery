@@ -1,0 +1,163 @@
+///
+/// API
+///
+/// @group api
+///
+
+
+/// Context used to get/set breakpoint widths
+/// @access private
+/// @type   {map}
+$_query-context: $query-breakpoints;
+
+
+/// Test if a breakpoint exists
+/// @param  {string} $name - Name of breakpoint
+/// @return {bool}         - True if breakpoint exists
+@function query-exists($name) {
+  @return map-has-key($_query-context, $name);
+}
+
+
+/// Get a breakpoint by its name
+/// @param  {string}     $name: null - Name of the breakpoint
+/// @return {number|map}             - Returns either the whole context or the breakpoint asked for
+@function query-get($name: null) {
+  // No name to search for, return whole context if it's not empty
+  @if not $name {
+    @if length($_query-context) > 0 {
+      @return $_query-context;
+    }
+    @return null;
+  }
+  // Check if query name exists in context
+  @if query-exists($name) {
+    @return map-get($_query-context, $name);
+  }
+
+  @warn "Breakpoint ‘#{$name}’ does not exist.";
+  @return null;
+}
+
+
+/// Shorthand for query-* mixins
+/// @param {string} $method  - Method to include
+/// @param {mixed}  $args... - Arguments to pass the mixin
+@mixin query($method, $args...) {
+  @if mixin-exists("query-#{$method}") {
+    @if $method == "init"   { @include query-init($args...) }
+    @if $method == "add"    { @include query-add($args...) }
+    @if $method == "remove" { @include query-remove($args...) }
+    @if $method == "set"    { @include query-set($args...) }
+    @if $method == "reset"  { @include query-reset($args...) }
+    @if $method == "use"    { @include query-use($args...) { @content } }
+  }
+
+  @else {
+    @warn "Method ‘#{$method}’ is not a valid api method for query.";
+  }
+}
+
+
+/// Add a new breakpoint
+/// @param {string|map} $name        - Name or map of names and widths of the breakpoint(s) to add
+/// @param {number}     $width: null - Width of a single breakpoint to add
+/// @param {bool}       $force       - Overwrite existing breakpoints? Default is false
+@mixin query-add($name, $width: null, $force: false) {
+  // Name is a map and no width given, call query-add on each map item
+  @if type-of($name) == map and not $width {
+    @each $_name, $_width in $name {
+      @include query-add($_name, $_width, $force);
+    }
+  }
+  // Validate name and width
+  @elseif type-of($name) == string and type-of($width) == number {
+    // Merge name and width into context if forced to or breakpoint does not
+    // exist
+    @if $force or not query-exists($name) {
+      $_query-context: map-merge($_query-context, ($name: $width)) !global;
+    }
+
+    @else {
+      @warn "Breakpoint ‘#{$name}’ (#{map-get($_query-context, $name)}) " +
+            "already exists.";
+    }
+  }
+  // Validation failed
+  @else {
+    @if type-of($name) != string {
+      @warn "Parameter ‘name’ must be a string. Was #{type-of($name)}.";
+    }
+    @if type-of($width) != number {
+      @warn "Parameter ‘width’ must be a number. Was #{type-of($width)}.";
+    }
+  }
+}
+
+
+/// Remove an existing breakpoint
+/// @param {string} $names... - Name(s) of the breakpoint(s) to remove
+@mixin query-remove($names...) {
+  // Remove existing breakpoints
+  @each $name in $names {
+    @if query-exists($name) {
+      $_query-context: map-remove($_query-context, $name) !global;
+    }
+
+    @else {
+      @warn "Breakpoint ‘#{$name}’ does not exist.";
+    }
+  }
+}
+
+
+/// Set one or multible existing breakpoints at once
+/// @param {string|map} $name        - Name or map of names and widths of the breakpoint(s) to set
+/// @param {number}     $width: null - Width of single brakpoint to set
+@mixin query-set($name, $width: null) {
+  // Both parameters given, overwrite width of existing breakpoint
+  @if query-exists($name) and $width {
+    @include query-add($name, $width, true);
+  }
+  // No width given, check if first parameter is a map
+  @elseif type-of($name) == map {
+    // Overwrite each existing breakpoint in context
+    @each $_name, $_width in $name {
+      @if query-exists($_name) {
+        @include query-add($_name, $_width, true);
+      }
+    }
+  }
+}
+
+
+/// Reset context (aka remove all breakpoints)
+@mixin query-reset() {
+  $names: map-keys($_query-context);
+  @include query-remove($names...);
+}
+
+
+/// Initialise query function by passing a map
+/// @param {map} $map - Map of breakpoint names and widths to initialise with
+@mixin query-init($map) {
+  // Clean up
+  @include query-reset;
+  // Add each breakpoint to context
+  @each $name, $width in $map {
+    @include query-add($name, $width);
+  }
+}
+
+
+/// Use a breakpoint while in mixin's `@content`
+/// @param {string|map} $name        - Name or map of names and widths of the breakpoint(s) to add
+/// @param {number}     $width: null - Width of a single breakpoint to add
+@mixin query-use($name, $width: null) {
+  $context: query-get();
+  @include query-add($name, $width, true);
+
+  @content;
+
+  @include query-init($context);
+}

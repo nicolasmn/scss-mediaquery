@@ -1,0 +1,14 @@
+
+@include describe("Query [function]") {
+  @include it("should return the queried breakpoint width") {
+    // Test defaults
+    @include should( expect( query(min, mini)  ), to( equal('(min-width: 480px)') ));
+
+    // Test with `init`
+    @include query(init, (tall: 500px, grande: 900px));
+
+    @include should( expect( query(min, tall)  ), to( equal('(min-width: 500px)') ));
+    @include should( expect( query(max, tall)  ), to( equal('(max-width: 499px)') ));
+    @include should( expect( query(only, tall) ), to( equal('(min-width: 500px) and (max-width: 899px)') ));
+  }
+}
