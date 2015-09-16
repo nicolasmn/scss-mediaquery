@@ -23,7 +23,7 @@ $ bower install --save scss-query
 ```
 
 #### Install via file download
-You can always just [download this repository](https://github.com/nicolasmn/scss-query/archive/master.zip) into your project and `@import` it.
+You can always just [download this repository](https://github.com/nicolasmn/scss-mediaquery/archive/master.zip) into your project and `@import` it.
 
 
 ### Usage
