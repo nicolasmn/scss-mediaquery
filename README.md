@@ -5,35 +5,11 @@ Simple and memorizeable `@media` queries helper function; build query strings de
 
 _Example:_
 ```scss
-@media #{query($mode, $size)} {
-  // ...
-}
-```
-
-
-## Getting started
-
-### Installation
-
-The recommended installation method is Bower but you can manually install `query()` function as well.
-
-#### Install using Bower
-```bash
-$ bower install --save scss-query
-```
-
-#### Install via file download
-You can always just [download this repository](https://github.com/nicolasmn/scss-mediaquery/archive/master.zip) into your project and `@import` it.
-
-
-### Usage
-
-```scss
 // Set custom breakpoints
-@query-breakpoints: (
-  tall:    500px,
-  grande:  900px,
-  venti:  1400px
+$query-breakpoints: (
+  'tall':    500px,
+  'grande':  900px,
+  'venti':  1400px
 );
 
 // @import query function
@@ -47,6 +23,60 @@ You can always just [download this repository](https://github.com/nicolasmn/scss
 _Remember to [interpolate](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#interpolation_) (`#{}`) functions in media queries._
 
 **Protip**: Use `@include query(init, $query-breakpoints)` to (re)initialize `query()` function whenever you want. Refer to the [API](#api) for an overview of all the available runtime manipulation mixins.
+
+
+## Installation
+
+The recommended installation method is Bower but you can manually install `query()` function as well.
+
+### Install using Bower
+```bash
+$ bower install --save scss-query
+```
+
+### Install via file download
+You can always just [download this repository](https://github.com/nicolasmn/scss-mediaquery/archive/master.zip) into your project and `@import` it.
+
+
+## Usage
+
+The initial example should cover pretty much everything there is to know for basic usage. But let's quick-start you even more: 
+
+### with [Bootstrap](http://getbootstrap.com/)
+```scss
+// v3
+$query-breakpoints: (
+  'xs': $screen-xs-min,
+  'sm': $screen-sm-min,
+  'md': $screen-md-min,
+  'lg': $screen-lg-min
+);
+
+// v4
+$query-breakpoints: $grid-breakpoints;
+```
+
+### with [Foundation](http://foundation.zurb.com/)
+```scss
+$query-breakpoints: (
+  'small':  $small-breakpoint,
+  'medium': $medium-breakpoint,
+  'large':  $large-breakpoint,
+  'xlarge': $xlarge-breakpoint
+);
+```
+
+### with [Semantic UI](http://semantic-ui.com/)
+Semantic UI uses LESS internally, however there are some SCSS ports around. So just in case you are using one of them:
+```scss
+$query-breakpoints: (
+  'mobile':            $mobileBreakpoint,
+  'tablet':            $tabletBreakpoint,
+  'computer':          $computerBreakpoint,
+  'largeMonitor':      $largeMonitorBreakpoint,
+  'widescreenMonitor': $widescreenMonitorBreakpoint
+);
+```
 
 
 ## Function `query(` `mode` `, ` `size` `)`
@@ -74,13 +104,13 @@ Defaults are in pixels. However, if you want to use another value like `em` you 
 
 ```scss
 $query-breakpoints: (
-  micro:   320px,
-  mini:    480px,
-  small:   768px,
-  medium:  960px,
-  large:  1440px,
-  huge:   2560px,
-  giant:  5120px
+  'micro':   320px,
+  'mini':    480px,
+  'small':   768px,
+  'medium':  960px,
+  'large':  1440px,
+  'huge':   2560px,
+  'giant':  5120px
 ) !default;
 ```
 
