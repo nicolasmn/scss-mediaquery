@@ -141,4 +141,4 @@ This project is provided under the terms of the [MIT License](LICENSE).
 
 ---
 
-Authored by **Nicolas Müller Noulezas** · [Github](https://github.com/nicolasmn) · [Twitter](https://twitter.com/nicolasmn) · [CodePen](https://codepen.com/nicolasmn)
+Authored by **Nicolas Müller Noulezas** · [Github](https://github.com/nicolasmn) · [Twitter](https://twitter.com/nicolasmn) · [CodePen](https://codepen.io/nicolasmn)
