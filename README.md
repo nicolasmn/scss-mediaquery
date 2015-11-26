@@ -43,6 +43,9 @@ The initial example should cover pretty much everything there is to know for bas
 
 ### with [Bootstrap](http://getbootstrap.com/)
 ```scss
+// v4
+$query-breakpoints: $grid-breakpoints;
+
 // v3
 $query-breakpoints: (
   'xs': $screen-xs-min,
@@ -50,13 +53,14 @@ $query-breakpoints: (
   'md': $screen-md-min,
   'lg': $screen-lg-min
 );
-
-// v4
-$query-breakpoints: $grid-breakpoints;
 ```
 
 ### with [Foundation](http://foundation.zurb.com/)
 ```scss
+// v6
+$query-breakpoints: $breakpoints;
+
+// v5
 $query-breakpoints: (
   'small':  $small-breakpoint,
   'medium': $medium-breakpoint,
