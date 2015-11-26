@@ -4,5 +4,4 @@ node_js:
 before_install:
 - gem install sass
 before_script:
-- npm update -g
 - npm install grunt-cli bower -g
