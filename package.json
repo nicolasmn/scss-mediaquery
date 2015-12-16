@@ -1,6 +1,6 @@
 {
   "name": "scss-query",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple and memorizeable @media queries helper function",
   "main": "_query.scss",
   "directories": {
