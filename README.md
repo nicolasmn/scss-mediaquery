@@ -1,4 +1,4 @@
-# Scss Query ![](https://travis-ci.org/nicolasmn/scss-mediaquery.svg)
+# Scss Query [![](https://travis-ci.org/nicolasmn/scss-mediaquery.svg)](https://travis-ci.org/nicolasmn/scss-mediaquery)
 
 Simple and memorizeable `@media` queries helper function; build query strings defining a [mode](#parameter-mode) and a breakpoint name.
 
