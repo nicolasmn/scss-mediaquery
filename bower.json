@@ -14,11 +14,10 @@
   ],
   "license": "MIT",
   "ignore": [
+    ".gitignore",
     ".travis.yml",
     "Gruntfile.js",
     "package.json",
-    "node_modules",
-    "bower_components",
     "tests"
   ],
   "dependencies": {
