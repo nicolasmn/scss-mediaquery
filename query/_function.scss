@@ -87,10 +87,10 @@
       @return null;
     }
 
-    @error  "‘#{$mode}’ is not a valid mode. " +
-            "Valid modes are: min, max, only, res.";
+    @error "‘#{$mode}’ is not a valid mode. " +
+           "Valid modes are: min, max, only.";
   }
+
   @error "There is no key ‘#{$size}’ in the current context. " +
          "Valid keys are: #{map-keys(query-get())}.";
-
 }

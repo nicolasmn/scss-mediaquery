@@ -1,8 +1,7 @@
 @import "../query";
 
 @import "bootcamp";
-$bc-setting-verbose:  true;
-// $bc-setting-warnings: false;
+$bc-setting-verbose: true;
 
 @include runner-start;
 @import "query";
