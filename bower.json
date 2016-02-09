@@ -14,7 +14,9 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    ".travis.yml",
+    "Gruntfile.js",
+    "package.json",
     "node_modules",
     "bower_components",
     "tests"
