@@ -1,10 +1,8 @@
-language: node_js
-node_js:
-- "0.10"
+language: sass
 before_install:
 - gem install sass
 before_script:
-- npm install grunt-cli bower -g
+- npm install grunt-cli -g
 addons:
   code_climate:
     repo_token: d4291d9497c7e6fb2b16864f84789b6d7c1520d474bca650140b00418604b056
