@@ -11,16 +11,15 @@
 /// @type    Function
 ///
 /// @require $query-breakpoints
-/// @require map-get-next <https://gist.github.com/agorilla/9df052eb1e15d8aea446>
 ///
 /// @param   {String} $mode - Either `min`, `max` or `only`
 /// @param   {mapKey} $size - Key in `$query-breakpoints`
 /// @return  {Query}        - Query string
 ///
 /// @example Scss - Query modes
-///   @media #{query(min, mini)} { ... }
-///   @media #{query(max, medium)} { ... }
-///   @media #{query(only, small)} { ... }
+///   @media (query(min, mini)) { ... }
+///   @media (query(max, medium)) { ... }
+///   @media (query(only, small)) { ... }
 ///
 /// @example Css - Output
 ///   @media (min-width: 480px) { ... }
