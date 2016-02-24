@@ -1,6 +1,6 @@
 {
   "name": "scss-query",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "Simple and memorizeable @media queries helper function",
   "main": "_query.scss",
   "directories": {
@@ -14,7 +14,7 @@
     "grunt": "^0.4.5"
   },
   "scripts": {
-    "test": "npm install && bower install && grunt test"
+    "test": "npm install && grunt test"
   },
   "repository": {
     "type": "git",

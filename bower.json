@@ -20,7 +20,5 @@
     "package.json",
     "tests"
   ],
-  "dependencies": {
-    "map-get-next": "https://gist.github.com/9df052eb1e15d8aea446.git"
-  }
+  "dependencies": {}
 }

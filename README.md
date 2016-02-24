@@ -14,12 +14,10 @@ $query-breakpoints: (
 // @import query function
 
 // Profit
-@media #{query(min, tall)} {
+@media (query(min, tall)) {
   body::before { content: "only at screens with a min-width of 500px"; }
 }
 ```
-
-_Remember to [interpolate](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#interpolation_) (`#{}`) functions in media queries._
 
 **Protip**: Use `@include query(init, $query-breakpoints)` to (re)initialize `query()` function whenever you want. Refer to the [API](#api) for an overview of all the available runtime manipulation mixins.
 
@@ -39,7 +37,7 @@ You can always just [download this repository](https://github.com/nicolasmn/scss
 
 ## Usage
 
-The initial example should cover pretty much everything there is to know for basic usage. But let's quick-start you even more: 
+The initial example should cover pretty much everything there is to know for basic usage. But let's quick-start you even more:
 
 ### with [Bootstrap](http://getbootstrap.com/)
 ```scss

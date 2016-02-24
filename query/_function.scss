@@ -63,24 +63,26 @@
 
     // Greater than breakpoint
     @if min == $mode {
-      @return "(min-width: #{query-get($size)})";
+      @return "min-width: #{query-get($size)}";
     }
 
     // Smaller than breakpoint
     @if max == $mode {
-      @return "(max-width: #{query-get($size) - $reduce})";
+      @return "max-width: #{query-get($size) - $reduce}";
     }
 
     // Only breakpoint
     @if only == $mode {
-
-      // Get next item from map
-      $capper: map-get-next(query-get(), $size);
+      // Find the next key
+      $query-keys: map-keys(query-get());
+      $next-index: index($query-keys, $size) + 1;
 
       // Return the query if there is a next item
-      @if $capper {
-        @return "(min-width: #{query-get($size)}) and " +
-                "(max-width: #{$capper - $reduce})";
+      @if $next-index <= length($query-keys) {
+        // Get next item from map
+        $capper: nth($query-keys, $next-index);
+
+        @return "#{query(min, $size)}) and (#{query(max, $capper)}";
       }
 
       @error "‘#{$size}’ is the last key in current context.";
