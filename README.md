@@ -1,4 +1,4 @@
-# Scss Query [![](https://travis-ci.org/nicolasmn/scss-mediaquery.svg)](https://travis-ci.org/nicolasmn/scss-mediaquery) [![](https://david-dm.org/nicolasmn/scss-mediaquery/dev-status.svg)](https://david-dm.org/nicolasmn/scss-mediaquery#info=devDependencies)
+# Scss Query [![](https://travis-ci.org/nicolasmn/scss-mediaquery.svg)](https://travis-ci.org/nicolasmn/scss-mediaquery) [![Code Climate](https://codeclimate.com/github/nicolasmn/scss-mediaquery/badges/gpa.svg)](https://codeclimate.com/github/nicolasmn/scss-mediaquery) [![](https://david-dm.org/nicolasmn/scss-mediaquery/dev-status.svg)](https://david-dm.org/nicolasmn/scss-mediaquery#info=devDependencies)
 
 Simple and memorizeable `@media` queries helper function; build query strings defining a [mode](#parameter-mode) and a breakpoint name.
 
