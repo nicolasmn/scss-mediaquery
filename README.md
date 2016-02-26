@@ -57,26 +57,6 @@ $query-breakpoints: (
 ```scss
 // v6
 $query-breakpoints: $breakpoints;
-
-// v5
-$query-breakpoints: (
-  'small':  $small-breakpoint,
-  'medium': $medium-breakpoint,
-  'large':  $large-breakpoint,
-  'xlarge': $xlarge-breakpoint
-);
-```
-
-### with [Semantic UI](http://semantic-ui.com/)
-Semantic UI uses LESS internally, however there are some SCSS ports around. So just in case you are using one of them:
-```scss
-$query-breakpoints: (
-  'mobile':            $mobileBreakpoint,
-  'tablet':            $tabletBreakpoint,
-  'computer':          $computerBreakpoint,
-  'largeMonitor':      $largeMonitorBreakpoint,
-  'widescreenMonitor': $widescreenMonitorBreakpoint
-);
 ```
 
 
@@ -120,12 +100,14 @@ $query-breakpoints: (
 
 The API allows for runtime manipulation of `query()` context. The following methods are provided as mixin via `@include query($method, $args...)`:
 
-- `add` - Add a new breakpoint
-- `remove` - Remove an existing breakpoint
-- `set` - Set one or multible existing breakpoints at once
-- `reset` - Reset context (aka remove all breakpoints)
-- `init` - Initialise query function by passing a map
-- `use` - Use a breakpoint while in mixin's `@content`
+| Method   | Description
+|----------|------------
+| `add`    | Add a new breakpoint
+| `remove` | Remove an existing breakpoint
+| `set`    | Set one or multible existing breakpoints at once
+| `reset`  | Reset context (aka remove all breakpoints)
+| `init`   | Initialise query function by passing a map
+| `use`    | Use a breakpoint while in mixin's `@content`
 
 See [query/_api.scss](query/_api.scss) for documentation on the individual mixins.
 
