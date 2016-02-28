@@ -20,7 +20,7 @@
       }
     }
 
-    @return join(join(quick-sort($less, $order), $equal), quick-sort($large, $order));
+    @return join(join(quick-sort($less), $equal), quick-sort($large));
   }
 
   @return $list;
