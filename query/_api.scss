@@ -5,6 +5,9 @@
 ///
 
 
+@import "utils/quick-sort";
+
+
 /// Context used to get/set breakpoint widths
 /// @access private
 /// @type   {map}
@@ -19,14 +22,35 @@ $_query-context: $query-breakpoints;
 }
 
 
+/// Sort query map by values
+/// @param  {map} $map - Map to sort
+/// @return {map}      - Sorted map
+@function query-sort($map) {
+  $vals: quick-sort(map-values($map));
+  $keys: map-keys($map);
+  $sort: ();
+
+  @each $key, $val in $map {
+    $keys: set-nth($keys, index($vals, $val), $key);
+  }
+
+  @for $i from 1 through length($keys) {
+    $sort: map-merge($sort, (nth($keys, $i): nth($vals, $i)));
+  }
+
+  @return $sort;
+}
+
+
 /// Get a breakpoint by its name
 /// @param  {string}     $name: null - Name of the breakpoint
 /// @return {number|map}             - Returns either the whole context or the breakpoint asked for
 @function query-get($name: null) {
-  // No name to search for, return whole context if it's not empty
+  // No name to search for, return whole context if it's not empty and sort it
+  // from smallest to tallest
   @if not $name {
     @if length($_query-context) > 0 {
-      @return $_query-context;
+      @return query-sort($_query-context);
     }
     @return null;
   }
@@ -36,6 +60,21 @@ $_query-context: $query-breakpoints;
   }
 
   @warn "Breakpoint ‘#{$name}’ does not exist.";
+  @return null;
+}
+
+
+/// Get next bigger breakpoint in context
+/// @param  {string} $name - Name of the breakpoint to start from
+/// @return {number|null}  - Next bigger breakpoint or null
+@function query-get-next($name) {
+  $keys: map-keys(query-get());
+  $nextIndex: index($keys, $name) + 1;
+
+  @if $nextIndex <= length($keys) {
+    @return nth($keys, $nextIndex);
+  }
+
   @return null;
 }
 

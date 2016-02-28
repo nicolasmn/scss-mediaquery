@@ -1,8 +1,12 @@
 ///
 /// Function
 ///
-/// @group function
+/// @group main
 ///
+
+
+@import "defaults";
+@import "api";
 
 
 /// Build a query string by given keyword and key in `$query-breakpoints`.
@@ -72,15 +76,10 @@
 
     // Only breakpoint
     @if only == $mode {
-      // Find the next key
-      $query-keys: map-keys(query-get());
-      $next-index: index($query-keys, $size) + 1;
 
-      // Return the query if there is a next item
-      @if $next-index <= length($query-keys) {
-        // Get next item from map
-        $capper: nth($query-keys, $next-index);
+      $capper: query-get-next($size);
 
+      @if $capper {
         @return "#{query(min, $size)}) and (#{query(max, $capper)}";
       }
 
