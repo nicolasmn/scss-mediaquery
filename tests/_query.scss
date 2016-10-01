@@ -4,6 +4,18 @@
     // Test defaults
     @include should( expect( query(min, mini)  ), to( equal('min-width: 480px') ));
 
+    // Test with unordered map
+    @include query(init, (
+      'huge':   2560px,
+      'mini':    480px,
+      'medium':  960px,
+      'small':   768px,
+      'giant':  5120px,
+      'micro':   320px,
+      'large':  1440px
+    ));
+    @include should( expect( query(only, mini) ), to( equal('min-width: 480px) and (max-width: 767px') ));
+
     // Test with `init`
     @include query(init, (tall: 500px, grande: 900px));
 

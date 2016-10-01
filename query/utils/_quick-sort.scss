@@ -1,0 +1,27 @@
+/// Quick sort
+/// @author Sam Richards
+/// @param  {List} $list - list to sort
+/// @return {List}
+@function quick-sort($list) {
+  $less:  ();
+  $equal: ();
+  $large: ();
+
+  @if length($list) > 1 {
+    $seed: nth($list, ceil(length($list) / 2));
+
+    @each $item in $list {
+      @if ($item == $seed) {
+        $equal: append($equal, $item);
+      } @else if ($item < $seed) {
+        $less: append($less, $item);
+      } @else if ($item > $seed) {
+        $large: append($large, $item);
+      }
+    }
+
+    @return join(join(quick-sort($less), $equal), quick-sort($large));
+  }
+
+  @return $list;
+}
