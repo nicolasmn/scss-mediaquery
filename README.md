@@ -26,6 +26,11 @@ $query-breakpoints: (
 
 The recommended installation method is Bower but you can manually install `query()` function as well.
 
+### Install using NPM
+```bash
+$ npm install --save scss-query
+```
+
 ### Install using Bower
 ```bash
 $ bower install --save scss-query
